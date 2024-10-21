@@ -7,7 +7,7 @@ const Modal = ({ opened, Content, children }) => {
   const [isOpened, setIsOpened] = useState(opened);
   return (
     <>
-      {children({ isOpened, setIsOpened })}
+      {children({ setIsOpened })}
       {isOpened && (
         <div className="modal">
           <div className="content">
