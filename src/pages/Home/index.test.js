@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import Home from "./index";
 import { api, DataProvider } from "../../contexts/DataContext";
+import EventList from "../../containers/Events";
 
 const mockData = {
   "events": [
@@ -85,8 +86,19 @@ describe("When Form is created", () => {
 });
 
 describe("When a page is created", () => {
-  it("a list of events is displayed", () => {
-    // to implement
+  it("a list of events is displayed", async () => {
+    api.loadData = jest.fn().mockReturnValue(mockData);
+
+    await act(async () => {
+      render(
+        <DataProvider>
+          <EventList />
+        </DataProvider>
+      );
+    })
+
+    await screen.getByText("User&product MixUsers")
+    await screen.getByText("Conférence #productCON")
   })
 
   it("a list a people is displayed", async () => {
