@@ -21,4 +21,18 @@ describe("Icon component", () => {
             expect(md5(screen.getByTestId("icon").getAttribute('d'))).toEqual("82f5be4a5c07199cb75dacec50b90b2a")
         });
     });
+    describe("When a icon is created with name youtube", () => {
+        it("the icon contain those path hash value 43342876c2fc40e5b2afe621443ff95b and 0af3bfe3ff95607efaf2b66ed8df1253", () => {
+            render(<Icon name="youtube" />)
+            const bothPath = screen.getAllByTestId("icon")
+            expect(md5(bothPath[0].getAttribute("d"))).toEqual("43342876c2fc40e5b2afe621443ff95b")
+            expect(md5(bothPath[1].getAttribute("d"))).toEqual("0af3bfe3ff95607efaf2b66ed8df1253")
+        });
+    });
+    describe("When a icon is created with name close", () => {
+        it("the icon contain this path hash value fe53fa5bf815b6d5983fcadf9a15d3d1", () => {
+            render(<Icon name="close" />)
+            expect(md5(screen.getByTestId("icon").getAttribute('d'))).toEqual("fe53fa5bf815b6d5983fcadf9a15d3d1")
+        });
+    });
 })
