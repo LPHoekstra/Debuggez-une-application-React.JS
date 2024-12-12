@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
 import Menu from "../../containers/Menu";
 import ServiceCard from "../../components/ServiceCard";
-import EventCard from "../../components/EventCard";
 import PeopleCard from "../../components/PeopleCard";
-
 import "./style.scss";
 import EventList from "../../containers/Events";
 import Slider from "../../containers/Slider";
@@ -11,24 +8,10 @@ import Logo from "../../components/Logo";
 import Icon from "../../components/Icon";
 import Form from "../../containers/Form";
 import Modal from "../../containers/Modal";
-import { useData } from "../../contexts/DataContext";
+import LastEvents from "../../containers/LastEvents";
 
-const Page = () => {
-  const { data } = useData()
-  const [last, setLast] = useState();
-
-  useEffect(() => {
-    if (data?.events) {
-      const byDateDesc = data?.events?.sort((evtA, evtB) =>
-        new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
-      ) || [];
-      const lastElement = byDateDesc.length > 0 ? byDateDesc[byDateDesc.length - 1] : null
-      setLast(lastElement)
-    }
-  }, [data])
-
-
-  return <>
+const Page = () => (
+  <>
     <header>
       <Menu />
     </header>
@@ -130,17 +113,7 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        {last ?
-          <EventCard
-            imageSrc={last.cover}
-            title={last.title}
-            date={new Date(last.date)}
-            small
-            label="boom"
-          />
-          :
-          <p>Aucune évènement récent.</p>
-        }
+        <LastEvents />
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
@@ -173,6 +146,6 @@ const Page = () => {
       </div>
     </footer>
   </>
-}
+)
 
 export default Page;

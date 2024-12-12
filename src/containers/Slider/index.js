@@ -10,8 +10,8 @@ const Slider = () => {
 
   const byDateDesc = useMemo(() =>
     data?.focus.sort((evtA, evtB) =>
-      new Date(evtA.date) < new Date(evtB.date) ? -1 : 1)
-    , [data])
+      new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
+    ), [data])
 
   useEffect(() => {
     const nextCard = setTimeout(
@@ -31,8 +31,7 @@ const Slider = () => {
         checked={index === radioIdx}
         onChange={() => setIndex(radioIdx)}
       />
-    ))
-    , [byDateDesc, index]);
+    )), [byDateDesc, index]);
 
   return (
     <div className="SlideCardList">
